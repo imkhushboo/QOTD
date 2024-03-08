@@ -1,45 +1,30 @@
 class Solution
 {
 public:
-    ListNode *middleNode(ListNode *head)
+    int maxFrequencyElements(vector<int> &nums)
     {
-        // Naive approach
+        map<int, int> mp;
 
-        int cnt_nodes = 0;
-
-        ListNode *ptr = head;
-
-        while (ptr != NULL)
+        for (auto x : nums)
         {
-            ptr = ptr->next;
-            cnt_nodes++;
+            mp[x]++;
         }
 
-        int mid = cnt_nodes / 2 + 1;
-
-        ptr = head;
-
-        while (mid != 1)
+        int maxi = 0;
+        int ans = 0;
+        for (auto x : mp)
         {
-            ptr = ptr->next;
-            mid--;
+            if (maxi < x.second)
+            {
+                maxi = x.second;
+                ans = x.second;
+            }
+            else if (maxi == x.second)
+            {
+                ans += x.second;
+            }
         }
 
-        return ptr;
-
-        // time complexity - O(N) + O(N/2);
-
-        // optimal approach - (Hare and tortoise algorithm)
-
-        ListNode *slow = head;
-        ListNode *fast = head;
-
-        while (fast != NULL and fast->next != NULL)
-        {
-            fast = fast->next->next;
-            slow = slow->next;
-        }
-
-        return slow;
+        return ans;
     }
 };
