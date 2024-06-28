@@ -1,0 +1,35 @@
+class Solution {
+public:
+    long long maximumImportance(int n, vector<vector<int>>& roads) 
+    {
+        unordered_map<long long , long long>mp;
+        
+        for (auto x:roads)
+        {
+            long long  first = x[0];
+            long long  second = x[1];
+            
+            mp[first] += 1;
+            mp[second] += 1;
+        }
+        
+        //for (auto x:mp)    cout<<x.first<<" "<<x.second<<endl;
+        
+        priority_queue<int>pq;
+        
+        for (auto x:mp)   pq.push(x.second);
+        
+        long long ans = 0;
+        
+        while(!pq.empty())
+        {
+            long long top = pq.top();
+            pq.pop();
+            
+            ans += (top * n);
+            n -= 1;
+        }
+        
+        return ans;
+    }
+};
