@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minDifference(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        if(n<=4) return 0;
+        int ans=INT_MAX;
+        for(int i=4;i>=1;i--)
+        {
+            cout<<nums[n-i]<<" "<<nums[4-i]<<"\n";
+            ans=min(ans,nums[n-i]-nums[4-i]);
+        }
+        
+        return ans;
+        
+    }
+};
